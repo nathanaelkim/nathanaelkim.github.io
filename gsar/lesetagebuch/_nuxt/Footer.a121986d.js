@@ -1,0 +1,1 @@
+import{a as o,o as s,b as a,h as e,f as t}from"./entry.abb47eca.js";const n={},_=t("a",{href:"https://gsamrosenberg.de"},"Gesamtschule Am Rosenberg",-1),r=t("a",{href:"https://nathanaelkim.github.io"},"Nathanael Kim",-1);function c(h,i){return s(),a("footer",null,[e(" © 2023 "),_,e(" | "),r])}const m=o(n,[["render",c]]);export{m as _};
