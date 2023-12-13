@@ -11,9 +11,3 @@
     </footer>
   </main>
 </template>
-<script module>
-const startAnimation = require('animation');
-export default {
-  startAnimation
-}
-</script>
