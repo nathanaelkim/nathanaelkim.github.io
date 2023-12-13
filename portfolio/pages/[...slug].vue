@@ -7,6 +7,9 @@
     </header>
     <ContentDoc />
     <footer>
+      <a href="/about">Über</a> &nbsp;|&nbsp;
+      <a href="/impressum">Impressum</a> &nbsp;|&nbsp;
+      <a href="/datenschutz">Datenschutz</a>&nbsp;|&nbsp;
       <p>&copy;2023 Nathanael Kim</p>
     </footer>
   </main>
