@@ -2,6 +2,15 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/content'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "@/assets/scss/style.scss";'
+        }
+      }
+    }
+  },
   app: {
     head: {
       meta: [
