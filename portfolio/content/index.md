@@ -1,6 +1,5 @@
 ## aktuelle Projekte
 ---------------------
-
 ## Projekte
 ----------------
 | [Lesetagebuch](/lesetagebuch) | |
