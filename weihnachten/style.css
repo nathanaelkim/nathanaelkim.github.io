@@ -36,6 +36,8 @@ button{
 .grid{
     background-color: #c0392b;
     color: #fff;
+    text-align: center;
+    justify-content: center;
 }
 picture img{
     height: 2cm;
@@ -47,4 +49,5 @@ picture i{
 .footer{
     color: #fff;
     background-color: brown;
+    justify-content: center;
 }
