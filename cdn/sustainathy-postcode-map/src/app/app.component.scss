@@ -1,0 +1,24 @@
+ $primary: #00bfa5;
+ $form: #E1E1E1;
+
+:root {
+    background-color: #000000;
+}
+
+.inputFied {
+    background-color: $form;
+    color: #000000;
+    input [type=text] {
+        font-size: 22pt;
+    }
+}
+
+ svg {
+    width: 100%;
+    margin: 4rem;
+    path {
+        &.show {
+            fill: $primary;
+        }
+    }
+ }
