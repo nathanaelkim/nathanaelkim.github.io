@@ -9,6 +9,8 @@
     background-color: $form;
     color: #000000;
     input [type=text] {
+        height: 2rem;
+        width: 5rem;
         font-size: 22pt;
     }
 }
