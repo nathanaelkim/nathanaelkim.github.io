@@ -1,9 +1,17 @@
-<header>
+<header onload="loadPage(event)">
   <div class="scroll-watch"></div>
-  <span class="h1 clr2">Hello, I'm Nathan</span>
-  <span class="h1 clr2">Pres enter to see my <!--{{ topics }}--> </span>
+  <h1 class="clr1 words-wrapper">
+    Hello, I'm Nathan. <br> Press enter or click to see my
+    <span class="words">
+      <span class="current">Photos</span>
+      <span>Codes</span> 
+      <span>Blogs</span> 
+    </span>
+  </h1>
 </header>
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+</main>
 <footer class="align-center bg3 clr2">
   <a>Inprint</a> | <a>Privary Policy</a>
 </footer>
