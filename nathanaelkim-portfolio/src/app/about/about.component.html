@@ -1,0 +1,13 @@
+<h1 class="clr1">About me</h1>
+<p class="clr1">
+    Hey, my name is Nathan. I'm 15 years old and I love to code.
+    But I like also to Photograph, do Kung Fu or play drums.
+    I would show you my Projects. If you have a question, let my know:
+</p>
+<img src="" alt="Nathanael Kim" class="user-photo">
+<form [formGroup]="form">
+    <input type="text" name="name" formControlName="name">
+    <input type="email" name="mail" formControlName="mail">
+    <textarea formControlName="message"></textarea>
+    <button (click)="Send()">Send!</button>
+  </form>
