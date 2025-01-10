@@ -17,7 +17,7 @@ export class AppComponent {
   constructor(protected httpClient : HttpClient, protected  router : Router) {
   }
   showVerlauf() {
-    this.httpClient.get<any>('api/showResults').subscribe((res) => {
+    this.httpClient.get<any>('/api/showResults').subscribe((res) => {
       Object.keys(res).forEach((key) => {
         this.verlauefe.push({
           "input": res[key].input,
