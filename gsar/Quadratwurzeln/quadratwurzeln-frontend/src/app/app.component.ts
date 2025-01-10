@@ -13,7 +13,18 @@ export class AppComponent {
   form = new FormGroup({
     input: new FormControl('input')
   })
+  protected  verlauefe : any [] = [];
   constructor(protected httpClient : HttpClient, protected  router : Router) {
+  }
+  showVerlauf() {
+    this.httpClient.get<any>('api/showResults').subscribe((res) => {
+      Object.keys(res).forEach((key) => {
+        this.verlauefe.push({
+          "input": res[key].input,
+          "result": res[key].result
+        })
+      })
+    })
   }
   Result1() {
     let body = {
