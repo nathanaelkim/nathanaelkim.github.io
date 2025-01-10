@@ -22,4 +22,11 @@ export class AppComponent {
     this.httpClient.post('/api/result1', body).subscribe()
     this.router.navigate(["/"])
   }
+  Result2() {
+    let body = {
+      "input": this.form.controls.input.value
+    };
+    this.httpClient.post('/api/result2', body).subscribe()
+    this.router.navigate(["/"])
+  }
 }
