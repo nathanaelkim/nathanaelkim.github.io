@@ -1,12 +1,25 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
+import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'quadratwurzeln-frontend';
+  form = new FormGroup({
+    input: new FormControl('input')
+  })
+  constructor(protected httpClient : HttpClient, protected  router : Router) {
+  }
+  Result1() {
+    let body = {
+      "input": this.form.controls.input.value
+    };
+    this.httpClient.post('/api/result1', body).subscribe()
+    this.router.navigate(["/"])
+  }
 }
