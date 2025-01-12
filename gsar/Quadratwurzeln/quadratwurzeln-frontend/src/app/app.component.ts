@@ -27,17 +27,11 @@ export class AppComponent {
     })
   }
   Result1() {
-    let body = {
-      "input": this.form.controls.input.value
-    };
-    this.httpClient.post('/api/result1', body).subscribe()
-    this.router.navigate(["/"])
+    const input = this.form.controls.input.value;
+    this.httpClient.get(`/api/result1?input=${input}`).subscribe();
   }
   Result2() {
-    let body = {
-      "input": this.form.controls.input.value
-    };
-    this.httpClient.post('/api/result2', body).subscribe()
-    this.router.navigate(["/"])
+    const input = this.form.controls.input.value;
+    this.httpClient.get(`/api/result1?input=${input}`).subscribe();
   }
 }
