@@ -50,8 +50,6 @@ public class QuadratwurzelnBackendApplication {
                 }
                 double sqrtResult = currentApproach;
                 return "Die Wurzel aus" + input + "ist" + sqrtResult;
-            } else {
-                return "Zahl zu niedrig!";
             }
             if (closestIndex < sqaresArray.length - 1) {
                 double successor = Math.sqrt(sqaresArray[closestIndex + 1]); // successor number as square
@@ -86,8 +84,6 @@ public class QuadratwurzelnBackendApplication {
                 }
                 double sqrtResult = currentApproach;
                 return "Die Wurzel aus" + input + "ist" + sqrtResult;
-            } else {
-                return "Zahl zu niedrig!";
             }
             if (next != -1) {
                 double successor = Math.sqrt(next); // define also the square of next
@@ -95,6 +91,7 @@ public class QuadratwurzelnBackendApplication {
                 return "Zahl zu hoch!";
             }
         }
+        return "Zahl zu niedrig!";
     }
 
     // POST: get Input of result2
