@@ -21,9 +21,9 @@ public class QuadratwurzelnBackendApplication {
     public <InputRequest> String calculateResult1(@RequestBody InputRequest inputRequest) {
        return calculateSquareRoot1(inputRequest.getInput());
    }
-   @GetMapping("/result1")
-   public String calculateResult1WithQuery(@RequestParam double input) {
-       return calculateSquareRoot1(input);
+   @GetMapping("/resultResponse1")
+   public String calculateResult1WithQuery(@RequestParam String result) {
+       return calculateSquareRoot1(result);
    }
 
     // POST: get Input of result2
@@ -31,13 +31,8 @@ public class QuadratwurzelnBackendApplication {
     public <InputRequest> String calculateResult1(@RequestBody InputRequest inputRequest) {
         return calculateSquareRoot2(inputRequest.getInput());
     }
-    @GetMapping("/result1")
-    public String calculateResult1WithQuery(@RequestParam double input) {
-        return calculateSquareRoot1(input);
+    @GetMapping("/resultResponse2")
+    public String calculateResult1WithQuery(@RequestParam String result) {
+        return calculateSquareRoot2(result);
     }
-
-    private String calculateSquareRoot1(double input) {
-
-    }
-
 }

@@ -5,6 +5,8 @@
     <button (click)="Result1()">Heronverfahren</button>
     <button (click)="Result2()">Intervallschachteilung</button>
   </form>
+  <p class="resultNumber"></p>
+  <p class="error"></p>
   <hr>
   <button (click)="showVerlauf()">Zeige Verlauf!</button>
   <details class="verlaufRows" *ngFor="let verlauf of verlauefe">
