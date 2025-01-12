@@ -18,21 +18,82 @@ public class QuadratwurzelnBackendApplication {
 
     // POST: get Input of result1
    @PostMapping("/result1")
-    public <InputRequest> String calculateResult1(@RequestBody InputRequest inputRequest) {
-       return calculateSquareRoot1(inputRequest.getInput());
+    public <InputRequest> String calculateResult1(@RequestBody double input) {
+       return calculateResult1WithQuery(input);
    }
    @GetMapping("/resultResponse1")
-   public String calculateResult1WithQuery(@RequestParam String result) {
-       return calculateSquareRoot1(result);
+   public String calculateResult1WithQuery(double input) {
+       Integer[] sqaresArray = squares.toArray(new  Integer[0]); // convert the numbers of the list to arrays
+       int closestIndex = -1;
+       // search the number in the list
+       for (int i = 0;  i < sqaresArray.length;  i++) {
+           if (sqaresArray[i] == input) {
+               closestIndex = i;
+               break;
+           }
+       }
+       if (closestIndex != -1) { // input is in the list
+           if (closestIndex > 0) {
+               double predecessor = Math.sqrt(sqaresArray[closestIndex -1]); // predecessor number as square
+               // approximation 1
+               double approach2 = (double) input / (double) predecessor;
+               double newApproach = (double) predecessor + (double) approach2 / 2;
+               double solveApproach = (double) input / (double) newApproach;
+               double currentApproach = newApproach;
+               double tolerance = 1e-6; // tolerance
+               int maxIterations = 1000; // max. Iterations
+               int iterationCount = 0;
+               while (Math.abs(currentApproach - solveApproach) > tolerance && iterationCount < maxIterations) {
+                   currentApproach = (currentApproach + solveApproach) / 2;
+                   solveApproach = input / currentApproach;
+                   iterationCount++;
+               }
+               double sqrtResult = currentApproach;
+               return "Die Wurzel aus" + input + "ist" + sqrtResult;
+           } else {
+               return "Zahl zu niedrig!";
+           }
+           if (closestIndex < sqaresArray.length - 1) {
+               double successor = Math.sqrt(sqaresArray[closestIndex + 1]); // successor number as square
+           } else {
+               return "Zahl zu hoch!";
+           }
+       } else {
+           // input not in list
+           int previous = -1, next = -1;
+           for (int i = 0;  i < sqaresArray.length;  i++) {
+               if (sqaresArray[i] < input) {
+                   previous = sqaresArray[i];
+               } else {
+                   next = sqaresArray[i];
+                   break;
+               }
+           }
+           if (previous != -1) {
+               double predecessor = Math.sqrt(previous); // define also the square of previous
+               // approximation 1
+               double approach = (double) input / (double) predecessor;
+               double newApproach = (double) predecessor + (double) approach / 2;
+               double solveApproach = (double) input / (double) newApproach;
+               double currentApproach = newApproach;
+               double tolerance = 1e-6; // tolerance
+               int maxIterations = 1000; // max. Iterations
+               int iterationCount = 0;
+               while (Math.abs(currentApproach - solveApproach) > tolerance && iterationCount < maxIterations) {
+                   currentApproach = (currentApproach + solveApproach) / 2;
+                   solveApproach = input / currentApproach;
+                   iterationCount++;
+               }
+               double sqrtResult = currentApproach;
+               return "Die Wurzel aus" + input + "ist" + sqrtResult;
+           } else {
+               return "Zahl zu niedrig!";
+           }
+           if (next != -1) {
+               double successor = Math.sqrt(next); // define also the square of next
+           } else {
+               return "Zahl zu hoch!";
+           }
+       }
    }
-
-    // POST: get Input of result2
-    @PostMapping("/result2")
-    public <InputRequest> String calculateResult1(@RequestBody InputRequest inputRequest) {
-        return calculateSquareRoot2(inputRequest.getInput());
-    }
-    @GetMapping("/resultResponse2")
-    public String calculateResult1WithQuery(@RequestParam String result) {
-        return calculateSquareRoot2(result);
-    }
 }
