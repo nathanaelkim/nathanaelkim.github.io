@@ -101,7 +101,7 @@ public class QuadratwurzelnBackendApplication {
         return calculateResult2WithQuery(input);
     }
 
-    @GetMapping("/resultResponse1")
+    @GetMapping("/resultResponse2")
     public String calculateResult2WithQuery(double input) {
         try {
             double ans = 0.5 * (input + 1); // get ANS with the equation 1/2*(x+1)
