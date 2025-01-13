@@ -32,27 +32,18 @@ export class AppComponent {
 
     // GET-Request
     this.httpClient.get(`/api/result1?input=${input}`).pipe(
-      switchMap((getResponse: any) => {
-        if (getResponse.resultNumber) {
-          return this.httpClient.post(`/api/result1?resultNumber=${getResponse.resultNumber}`, { input });
-        } else if (getResponse.error) {
-          return this.httpClient.post(`/api/result1?error=${getResponse.error}`, { input });
-        } else {
-          return [];
-        }
+      switchMap((response: any) => {
+        // Optional: Process the GET response if needed
+        const postData = { data: response }; // Adjust the payload structure as needed
+        return this.httpClient.post('/api/resultResponse1', postData);
       })
-    ).subscribe(
-      (postResponse: any) => {
-        if (postResponse.resultNumber) {
-          document.getElementsByClassName("resultNumber")[0].textContent = postResponse.resultNumber;
-        } else if (postResponse.error) {
-          document.getElementsByClassName("error")[0].textContent = postResponse.error;
-        }
-      },
-      (error) => {
-        console.error(error);
+    ).subscribe((res: any) =>{
+      const queryParam = res?.queryParam;
+      const resultElement = document.getElementsByClassName("result")[0];
+      if (resultElement) {
+        resultElement.textContent = queryParam || 'No data received';
       }
-    );
+    });
   }
 
   Result2() {
@@ -60,26 +51,17 @@ export class AppComponent {
 
     // GET-Request
     this.httpClient.get(`/api/result2?input=${input}`).pipe(
-      switchMap((getResponse: any) => {
-        if (getResponse.resultNumber) {
-          return this.httpClient.post(`/api/result2?resultNumber=${getResponse.resultNumber}`, { input });
-        } else if (getResponse.error) {
-          return this.httpClient.post(`/api/result2?error=${getResponse.error}`, { input });
-        } else {
-          return [];
-        }
+      switchMap((response: any) => {
+        // Optional: Process the GET response if needed
+        const postData = { data: response }; // Adjust the payload structure as needed
+        return this.httpClient.post('/api/resultResponse2', postData);
       })
-    ).subscribe(
-      (postResponse: any) => {
-        if (postResponse.resultNumber) {
-          document.getElementsByClassName("resultNumber")[0].textContent = postResponse.resultNumber;
-        } else if (postResponse.error) {
-          document.getElementsByClassName("error")[0].textContent = postResponse.error;
-        }
-      },
-      (error) => {
-        console.error(error);
+    ).subscribe((res: any) =>{
+      const queryParam = res?.queryParam;
+      const resultElement = document.getElementsByClassName("result")[0];
+      if (resultElement) {
+        resultElement.textContent = queryParam || 'No data received';
       }
-    );
+    });
   }
 }
