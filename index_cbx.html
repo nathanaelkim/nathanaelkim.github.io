@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crobix - Rocket League E-Sports Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.3s;
+            padding: 0.5rem;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+            transform: translateY(-3px);
+        }
+
+        .nav-links i {
+            font-size: 1.5rem;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #00ffff;
+        }
+
+        /* Header mit Video */
+        .header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 128, 255, 0.2));
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .header-content h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+            }
+            to {
+                text-shadow: 0 0 30px #0080ff, 0 0 40px #0080ff, 0 0 50px #0080ff;
+            }
+        }
+
+        .header-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #00ffff;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 128, 255, 0.1));
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
+        }
+
+        .about-card i {
+            font-size: 3rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00ffff;
+        }
+
+        /* Tournaments Section */
+        .tournaments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .tournament-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(0, 128, 255, 0.05));
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .tournament-card:hover {
+            border-color: #00ffff;
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .tournament-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .tournament-card h3 {
+            font-size: 1.5rem;
+            color: #00ffff;
+        }
+
+        .placement {
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .tournament-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tournament-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #aaa;
+        }
+
+        .tournament-info i {
+            color: #00ffff;
+        }
+
+        /* Shop Section */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(0, 128, 255, 0.05));
+            border: 2px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.4);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #fff;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #00ffff;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: #00ffff;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #00ffff, #0080ff);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #00ffff;
+            font-size: 2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            color: #0080ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+
+            .nav-links.active {
+                max-height: 500px;
+            }
+
+            .header-content h1 {
+                font-size: 3rem;
+            }
+
+            .header-content p {
+                font-size: 1.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Crobix</div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home"><i class="fas fa-home"></i><span>Home</span></a></li>
+                <li><a href="#about"><i class="fas fa-users"></i><span>Team</span></a></li>
+                <li><a href="#tournaments"><i class="fas fa-trophy"></i><span>Turniere</span></a></li>
+                <li><a href="#shop"><i class="fas fa-shopping-cart"></i><span>Shop</span></a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i><span>Kontakt</span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header with Video -->
+    <section id="home" class="header">
+        <video class="video-bg" autoplay muted loop playsinline>
+            <source src="https://cdn.cloudflare.steamstatic.com/steam/apps/256819272/movie480_vp9.webm" type="video/webm">
+        </video>
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>CROBIX</h1>
+            <p>Rocket League E-Sports Team</p>
+            <p>🚀 Ready to Dominate the Arena 🚀</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>Über Uns</h2>
+        <div class="about-content">
+            <div class="about-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Unsere Mission</h3>
+                <p>Wir sind Crobix, ein ambitioniertes Rocket League E-Sports Team, das sich zum Ziel gesetzt hat, in der kompetitiven Szene ganz oben mitzuspielen. Mit Leidenschaft, Teamwork und unermüdlichem Training kämpfen wir uns durch die Ranglisten.</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-star"></i>
+                <h3>Unser Team</h3>
+                <p>Bestehend aus talentierten Spielern mit jahrelanger Erfahrung in Rocket League. Jedes Mitglied bringt einzigartige Fähigkeiten und Strategien ein, die uns als Team unschlagbar machen.</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Unsere Ziele</h3>
+                <p>Teilnahme an nationalen und internationalen Turnieren, stetige Verbesserung unserer Skills und der Aufbau einer starken Community. Gemeinsam streben wir nach dem Champion-Titel!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tournaments Section -->
+    <section id="tournaments">
+        <h2>Unsere Turniere</h2>
+        <div class="tournaments-grid" id="tournamentsGrid"></div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop">
+        <h2>Shop</h2>
+        <div class="shop-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <div class="product-info">
+                    <h3>Crobix Team Jersey</h3>
+                    <p>Offizielles Team-Trikot in Premium-Qualität. Perfekt für Fans und Spieler!</p>
+                    <div class="product-price">49,99 €</div>
+                    <button class="buy-btn" onclick="buyProduct('https://gumroad.com/l/crobix-jersey')">Jetzt Kaufen</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-hat-cowboy"></i>
+                </div>
+                <div class="product-info">
+                    <h3>Crobix Cap</h3>
+                    <p>Stylische Cap mit gesticktem Logo. Ein Must-Have für jeden Fan!</p>
+                    <div class="product-price">24,99 €</div>
+                    <button class="buy-btn" onclick="buyProduct('https://gumroad.com/l/crobix-cap')">Jetzt Kaufen</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-mug-hot"></i>
+                </div>
+                <div class="product-info">
+                    <h3>Crobix Gaming Mug</h3>
+                    <p>Hochwertige Keramiktasse für lange Gaming-Sessions. Spülmaschinenfest!</p>
+                    <div class="product-price">14,99 €</div>
+                    <button class="buy-btn" onclick="buyProduct('https://gumroad.com/l/crobix-mug')">Jetzt Kaufen</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-mouse"></i>
+                </div>
+                <div class="product-info">
+                    <h3>Crobix Mousepad</h3>
+                    <p>XXL Gaming Mousepad mit rutschfester Unterseite und Crobix-Design.</p>
+                    <div class="product-price">19,99 €</div>
+                    <button class="buy-btn" onclick="buyProduct('https://gumroad.com/l/crobix-mousepad')">Jetzt Kaufen</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Kontakt</h2>
+        <div class="about-content">
+            <div class="about-card">
+                <i class="fas fa-envelope"></i>
+                <h3>E-Mail</h3>
+                <p>info@crobix-esports.de</p>
+            </div>
+            <div class="about-card">
+                <i class="fab fa-discord"></i>
+                <h3>Discord</h3>
+                <p>discord.gg/crobix</p>
+            </div>
+            <div class="about-card">
+                <i class="fab fa-twitch"></i>
+                <h3>Twitch</h3>
+                <p>twitch.tv/crobix</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Crobix E-Sports Team. Alle Rechte vorbehalten.</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-twitch"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Simulierte Turnier-Datenbank
+        const tournaments = [
+            {
+                name: "German Championship 2024",
+                date: "15.12.2024",
+                placement: "1. Platz",
+                prize: "5.000€",
+                participants: "32 Teams"
+            },
+            {
+                name: "ESL Meisterschaft Winter",
+                date: "03.11.2024",
+                placement: "2. Platz",
+                prize: "3.000€",
+                participants: "64 Teams"
+            },
+            {
+                name: "Rocket League Open Cup",
+                date: "20.09.2024",
+                placement: "3. Platz",
+                prize: "1.500€",
+                participants: "48 Teams"
+            },
+            {
+                name: "Summer Showdown 2024",
+                date: "15.07.2024",
+                placement: "1. Platz",
+                prize: "4.000€",
+                participants: "40 Teams"
+            },
+            {
+                name: "Spring Championship",
+                date: "10.04.2024",
+                placement: "4. Platz",
+                prize: "800€",
+                participants: "56 Teams"
+            },
+            {
+                name: "Winter League Finals",
+                date: "25.01.2024",
+                placement: "2. Platz",
+                prize: "2.500€",
+                participants: "32 Teams"
+            }
+        ];
+
+        // Turniere laden
+        function loadTournaments() {
+            const grid = document.getElementById('tournamentsGrid');
+            tournaments.forEach(tournament => {
+                const card = document.createElement('div');
+                card.className = 'tournament-card';
+                card.innerHTML = `
+                    <div class="tournament-header">
+                        <h3>${tournament.name}</h3>
+                        <div class="placement">${tournament.placement}</div>
+                    </div>
+                    <div class="tournament-info">
+                        <span><i class="fas fa-calendar"></i> ${tournament.date}</span>
+                        <span><i class="fas fa-trophy"></i> Preisgeld: ${tournament.prize}</span>
+                        <span><i class="fas fa-users"></i> ${tournament.participants}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Navigation Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Gumroad Kauf
+        function buyProduct(gumroadLink) {
+            window.open(gumroadLink, '_blank');
+        }
+
+        // Seite laden
+        window.addEventListener('load', loadTournaments);
+    </script>
+</body>
+</html>
